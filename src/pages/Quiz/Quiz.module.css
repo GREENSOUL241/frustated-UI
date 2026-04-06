@@ -1,0 +1,214 @@
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.headerCard,
+.questionShell,
+.adBreakPanel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.08), transparent 68%),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.headerCard {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 24px;
+}
+
+.questionBadge {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.headerCard h1 {
+  margin-top: 10px;
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+.roundStats {
+  min-width: 120px;
+  display: grid;
+  gap: 10px;
+  text-align: right;
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.questionShell {
+  position: relative;
+  padding: 28px;
+  display: grid;
+  gap: 20px;
+}
+
+.prompt {
+  font-size: clamp(1.6rem, 4vw, 2.35rem);
+  line-height: 1.1;
+}
+
+.optionsGrid,
+.fakeInputGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.optionsGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.answerButton,
+.fakeInput,
+.confirmBtn,
+.closeAdBtn {
+  min-height: 58px;
+  border-radius: 18px;
+}
+
+.answerButton {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.answerButtonSelected {
+  background: linear-gradient(135deg, rgba(64, 224, 255, 0.24), rgba(255, 79, 163, 0.22));
+}
+
+.fakeInput {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+  caret-color: transparent;
+}
+
+.fakeInputSelected {
+  border-color: rgba(240, 224, 64, 0.5);
+  background: rgba(240, 224, 64, 0.12);
+}
+
+.confirmBtn,
+.closeAdBtn {
+  justify-self: start;
+  padding-inline: 22px;
+  background: linear-gradient(135deg, var(--accent1), #fff176);
+  color: #161320;
+  font-family: var(--font-display);
+}
+
+.smallText {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.skipGhost {
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(8, 10, 24, 0.12);
+  color: rgba(245, 244, 255, 0.08);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.skipGhost:hover {
+  color: rgba(245, 244, 255, 0.28);
+}
+
+.adBreak {
+  max-width: 860px;
+  margin: 0 auto;
+  min-height: calc(100vh - 150px);
+  display: grid;
+  place-items: center;
+}
+
+.adBreakPanel {
+  width: 100%;
+  padding: 28px;
+  display: grid;
+  gap: 20px;
+  text-align: center;
+}
+
+.adBreakPanel h1 {
+  font-size: clamp(2.2rem, 7vw, 3.7rem);
+}
+
+.fakeAd {
+  display: grid;
+  gap: 10px;
+  padding: 26px;
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 112, 51, 0.22), rgba(240, 224, 64, 0.16)),
+    rgba(0, 0, 0, 0.24);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+}
+
+.answerButton {
+  transition: transform 0.2s ease, background 0.15s;
+}
+
+.answerButton.shuffling {
+  animation: shufflePop 0.25s ease;
+}
+
+@keyframes shufflePop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(0.93) rotate(-1deg); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 720px) {
+  .headerCard,
+  .questionShell,
+  .adBreakPanel {
+    padding: 20px;
+  }
+
+  .headerCard {
+    flex-direction: column;
+  }
+
+  .roundStats {
+    min-width: 0;
+    text-align: left;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+  }
+
+  .optionsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .confirmBtn,
+  .closeAdBtn {
+    width: 100%;
+    justify-self: stretch;
+  }
+}

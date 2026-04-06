@@ -1,0 +1,70 @@
+.ad {
+  position: fixed;
+  z-index: 9500;
+  width: min(240px, 68vw);
+  padding: 16px 14px 14px;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 24%),
+    var(--ad-color, #ff4400);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.38);
+  animation: adFloat 3s ease-in-out infinite alternate;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.34);
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.headline {
+  padding-right: 18px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.28);
+  margin-bottom: 8px;
+}
+
+.body {
+  margin-bottom: 12px;
+  font-size: 0.82rem;
+  color: rgba(255, 248, 238, 0.95);
+}
+
+.ctaBtn {
+  width: 100%;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+@keyframes adFloat {
+  from {
+    transform: translateY(0) rotate(-1.2deg);
+  }
+
+  to {
+    transform: translateY(-10px) rotate(1.2deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .ad {
+    width: min(210px, 62vw);
+  }
+}

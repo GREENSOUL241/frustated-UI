@@ -1,0 +1,85 @@
+.page {
+  min-height: calc(100vh - 150px);
+  display: grid;
+  place-items: center;
+}
+
+.panel {
+  width: min(680px, 100%);
+  padding: 34px 28px;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.08), transparent 70%),
+    var(--surface);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.kicker {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.score {
+  margin-top: 16px;
+  font-size: clamp(3.4rem, 10vw, 6rem);
+}
+
+.stars {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.star {
+  width: 38px;
+  height: 38px;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 92%, 50% 70%, 21% 92%, 32% 57%, 2% 35%, 39% 35%);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.starFilled {
+  background: linear-gradient(135deg, var(--accent1), #fff176);
+}
+
+.snarky {
+  margin-top: 16px;
+  font-size: 1.2rem;
+}
+
+.xpLine {
+  margin-top: 10px;
+  color: var(--text-muted);
+}
+
+.dashBtn {
+  margin-top: 24px;
+  background: linear-gradient(135deg, rgba(64, 224, 255, 0.28), rgba(255, 79, 163, 0.28));
+  color: var(--text);
+}
+
+.rollBtn {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent1), #fff176);
+  color: #161320;
+  font-family: var(--font-display);
+  z-index: 20;
+}
+
+@media (max-width: 720px) {
+  .panel {
+    padding: 26px 18px;
+  }
+
+  .star {
+    width: 30px;
+    height: 30px;
+  }
+}
