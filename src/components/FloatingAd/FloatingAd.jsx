@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { AD_POOL } from '../../data/questions'
 import styles from './FloatingAd.module.css'
 
-export default function FloatingAd({ id, onClose }) {
-  const ad = AD_POOL[id % AD_POOL.length]
+export default function FloatingAd({ adId, adIndex, onClose }) {
+  const ad = AD_POOL[adIndex % AD_POOL.length]
   const [position] = useState(() => ({
     top: `${8 + Math.random() * 68}%`,
     left: `${3 + Math.random() * 62}%`,
@@ -20,7 +20,7 @@ export default function FloatingAd({ id, onClose }) {
         animationDelay: `${delay}s`,
       }}
     >
-      <button type="button" className={styles.closeBtn} onClick={() => onClose(id)}>
+      <button type="button" className={styles.closeBtn} onClick={() => onClose(adId)}>
         X
       </button>
       <div className={styles.headline}>{ad.headline}</div>

@@ -29,6 +29,7 @@ export default function Login() {
   const [answeredBonus, setAnsweredBonus] = useState({})
   const [bannerDismissed, setBannerDismissed] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
+  const [validationErrors, setValidationErrors] = useState([])
 
   useSabotageInput(username, setUsername, { isUsername: true })
 
@@ -62,15 +63,61 @@ export default function Login() {
     setWaiverAccepted(checked)
 
     if (checked && !waiverRewarded) {
-      addXP(10, 'Initialed the waiver')
+      addXP(10, 'Waiver courage bonus')
       setWaiverRewarded(true)
     }
+  }
+
+  function validateUsername(username) {
+    const errors = []
+    if (!username) return ['Username is required']
+    
+    // 1. First letter must be uppercase
+    if (username[0] !== username[0].toUpperCase()) errors.push('First letter must be uppercase')
+    
+    // 2. At least 5 characters
+    if (username.length < 5) errors.push('Must be at least 5 characters')
+    
+    // 3. Contain at least one number
+    if (!/\d/.test(username)) errors.push('Must contain at least one number')
+    
+    // 4. Contain at least one special character
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(username)) errors.push('Must contain at least one special character')
+    
+    // 5. No spaces
+    if (/\s/.test(username)) errors.push('Must not contain spaces')
+    
+    // 6. End with a number
+    if (!/\d$/.test(username)) errors.push('Must end with a number')
+    
+    // 7. Start with a letter
+    if (!/^[a-zA-Z]/.test(username)) errors.push('Must start with a letter')
+    
+    // 8. Not contain 'admin' or 'root'
+    if (/admin|root/i.test(username)) errors.push('Must not contain "admin" or "root"')
+    
+    // 9. Must contain 'quiz'
+    if (!/quiz/i.test(username)) errors.push('Must contain "quiz"')
+    
+    // 10. Exactly 10 characters
+    if (username.length !== 10) errors.push('Must be exactly 10 characters')
+
+    // 11. No consecutive letters
+    if (/([a-zA-Z])\1/.test(username)) errors.push('Must not have consecutive same letters')
+
+    // 12. Must contain the current year
+    if (!username.includes('2026')) errors.push('Must contain the current year 2026')
+    
+    return errors
   }
 
   function handleSubmit(event) {
     event.preventDefault()
 
-    if (!canEnter) {
+    const errors = validateUsername(username)
+    setValidationErrors(errors)
+
+    if (errors.length > 0 || !waiverAccepted) {
       return
     }
 
@@ -164,6 +211,13 @@ export default function Login() {
                 placeholder="Captain Chaos"
                 maxLength={18}
               />
+              {validationErrors.length > 0 && (
+                <ul className={styles.errors}>
+                  {validationErrors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                  ))}
+                </ul>
+              )}
 
               <label className={styles.checkboxRow}>
                 <input
@@ -174,8 +228,12 @@ export default function Login() {
                 <span>I can handle mild emotional damage and popup trauma.</span>
               </label>
 
-              <button type="submit" className={styles.submitBtn} disabled={!canEnter}>
+              <button type="submit" className={styles.submitBtn} disabled={!canEnter || validationErrors.length > 0}>
                 Enter QuizMayhem
+              </button>
+
+              <button type="button" className={styles.submitBtn} onClick={() => setUsername('')}>
+                Clear Username (Don't Click)
               </button>
             </form>
 

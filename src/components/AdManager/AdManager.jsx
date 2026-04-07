@@ -35,7 +35,7 @@ export default function AdManager() {
   return (
     <>
       {ads.map((ad) => (
-        <FloatingAd key={ad.id} id={ad.adIndex} onClose={closeAd} />
+        <FloatingAd key={ad.id} adId={ad.id} adIndex={ad.adIndex} onClose={closeAd} />
       ))}
     </>
   )
